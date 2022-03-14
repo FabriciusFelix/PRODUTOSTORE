@@ -1,0 +1,74 @@
+﻿@model ProdutoViewModel
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>
+                Id
+            </td>
+            <th>
+                Nome
+            </th>
+            <th>
+                Descricao
+            </th>
+            <th>
+                Categoria
+            </th>
+            <th>
+                Ativo
+            </th>
+            <th>
+                Perecivel
+            </th>
+            <th>
+                Ação
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model.Produtos.Any())
+            {
+                foreach (var item in Model.Produtos)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descricao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Categoria.Nome)
+                        </td>
+                        <td>
+                            @if (item.Ativo){<text>Sim</text>}
+                            else
+                            {<text>Não</text>}     
+                        </td>
+                        <td>
+                            @if (item.Perecivel){<text>Sim</text>}
+                            else
+                            {<text>Não</text>}     
+                        </td>
+
+
+                        <td>
+                            <a button type="button" class="btn btn-success" asp-action="Edit" asp-controller="Produtos"
+                    asp-route-id="@item.Id">Atualizar</a> |
+                            <a button type="button" class="btn btn-danger" asp-action="Delete" asp-controller="Produtos"
+                    asp-route-id="@item.Id">Deletar</a>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+
+    </tbody>
+</table>
